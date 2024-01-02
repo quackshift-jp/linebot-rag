@@ -8,6 +8,8 @@ from linebot.v3.webhook import WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextSendMessage
 
+from src.rag import retrieval_augmented_generation
+
 load_dotenv(verbose=True)
 
 app = FastAPI()
@@ -45,4 +47,9 @@ def handle_message(event: MessageEvent) -> None:
         送信されたメッセージの情報です。
     """
     message = event.message.text
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=message))
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(
+            text=retrieval_augmented_generation.main("src/data", message)["result"]
+        ),
+    )

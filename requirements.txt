@@ -2,3 +2,7 @@ line-bot-sdk==3.7.0
 fastapi==0.108.0
 python-dotenv==1.0.0
 uvicorn==0.25.0
+langchain==0.0.353
+faiss-cpu==1.7.4
+tiktoken==0.5.2
+openai==1.6.1
